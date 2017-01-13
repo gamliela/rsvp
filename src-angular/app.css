@@ -1,0 +1,94 @@
+* { box-sizing: border-box }
+
+body {
+  direction: rtl;
+  font-size: 3vmin;
+}
+
+page .searchDiv {
+  padding: 60px 30%;
+}
+
+page .searchDiv input {
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+}
+
+page .results {
+  width: calc(100% - 20px);
+  margin: auto;
+  padding-bottom: 65px;
+}
+
+page .results .header {
+  color: #ccc;
+  display: flex;
+}
+
+page .row.body, page .row.edit>form {
+  display: flex;
+}
+
+page .results person {
+  background-color: #dadada;
+  display: block;
+  margin: 12px 0;
+}
+
+page .results person.arrived {
+  background-color: #cadaca;
+}
+
+page .results person .msg {
+  font-size: 0.8em;
+  padding: 0 10px 10px 10px;
+}
+
+page .results person .msg.error {
+  color: red;
+}
+
+page .results .col {
+  display: inline-block;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+page .results .col.name {
+  width: 35%;
+}
+
+page .results .col.tableNumber {
+  width: 25%;
+}
+
+page .results .col.numGuests, page .results .col.arrivalTime, page .results .col.handledBy, page .results .col.ops {
+  width: 10%;
+}
+
+page .results .col input {
+  width: 100%;
+}
+
+page .results .link {
+  font-size: 0.5em;
+  color: blue;
+  vertical-align: middle;
+}
+
+page .results .link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+page footer {
+  display: block;
+  background-color: #153c27;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 20px;
+}

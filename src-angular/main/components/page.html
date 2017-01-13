@@ -1,0 +1,28 @@
+<div class="searchDiv">
+	<input ng-model="page.search" placeholder="חפש..."/>
+</div>
+<div class="results">
+	<div class="row header">
+		<div class="col name">
+			שם אורח
+		</div>
+		<div class="col tableNumber">
+			מספר שולחן
+		</div>
+		<div class="col numGuests">
+			כמות
+		</div>
+		<div class="col arrivalTime">
+			זמן
+		</div>
+		<div class="col handledBy">
+			טופל
+		</div>
+		<div class="col ops">
+			&nbsp;
+		</div>
+	</div>
+	<person ng-repeat="person in page.people | filter: {name:page.search}" props="{person:person}"
+	        ng-class="{arrived:person.newArrivalTime}"></person>
+</div>
+<footer props="{event:page.event,people:page.people}"></footer>

@@ -1,0 +1,16 @@
+<span ng-if="$ctrl.props.event">
+שם אירוע:
+{{$ctrl.props.event.name}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+תאריך:
+{{$ctrl.props.event.event_date}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+מקום:
+{{$ctrl.props.event.location}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+הגיעו:
+{{$ctrl.totalSeats()}} / {{$ctrl.totalArrived()}}
+</span>
+<span ng-if="!$ctrl.props.event">
+אין אפשרות להתחבר לשרת!
+</span>

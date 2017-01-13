@@ -1,0 +1,51 @@
+<div class="row body">
+	<div class="col name">
+		{{$ctrl.props.person.name}}
+	</div>
+	<div class="col tableNumber">
+		{{$ctrl.props.person.tableNumber}}
+	</div>
+	<div class="col numGuests">
+		{{$ctrl.props.person.numGuests}}
+	</div>
+	<div class="col arrivalTime">
+		{{$ctrl.props.person.arrivalTime}}
+	</div>
+	<div class="col handledBy">
+		{{$ctrl.props.person.handledBy}}
+	</div>
+	<div class="col ops">
+		<span class="link" ng-show="!$ctrl.isEdit" ng-click="$ctrl.edit()">
+			עריכה
+		</span>
+	</div>
+</div>
+<div class="row edit" ng-if="$ctrl.isEdit">
+	<form novalidate>
+		<div class="col name">
+			&nbsp;
+		</div>
+		<div class="col tableNumber">
+			<input type="text" ng-model="$ctrl.form.newTableNumber">
+		</div>
+		<div class="col numGuests">
+			<input type="text" ng-model="$ctrl.form.newNumGuests">
+		</div>
+		<div class="col arrivalTime">
+			<input type="text" ng-model="$ctrl.form.newArrivalTime">
+		</div>
+		<div class="col handledBy">
+			<input type="text" ng-model="$ctrl.form.newHandledBy">
+		</div>
+		<div class="col ops">
+			<span class="link" ng-click="$ctrl.save()">שמירה</span>
+			<span class="link" ng-click="$ctrl.isEdit = false">ביטול</span>
+		</div>
+	</form>
+	<div class="msg error" ng-if="$ctrl.saveError">
+		בעיה בשמירה, אנא נסה שוב
+	</div>
+	<div class="msg success" ng-if="$ctrl.isSaving">
+		מבצע שמירה...
+	</div>
+</div>
