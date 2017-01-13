@@ -19,21 +19,25 @@ const config = {
                 include: srcPath,
                 loader: 'babel-loader',
                 options: {
-                    presets: [['es2015', {'modules': false}], "react"]
+                    presets: [['es2015', {'modules': false}], 'react']
                 }
-            }/*,
+            },
             {
-                test: /\.scss$/,
+                test: /\.(sass|scss)$/,
                 use: [
                     {
-                        loader: 'postcss-loader',
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
                         options: {
-                            plugins: ...
+                            modules: true,
+                            localIdentName: '[local]---[hash:base64:5]'
                         }
                     },
                     'sass-loader'
                 ]
-            }*/
+            }
         ],
     },
     plugins: [
@@ -41,7 +45,7 @@ const config = {
             template: path.join(srcPath, 'index.html')
         })
     ],
-    devtool: "cheap-eval-source-map"
+    devtool: 'cheap-eval-source-map'
 };
 
 module.exports = config;
