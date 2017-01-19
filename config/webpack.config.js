@@ -17,10 +17,7 @@ const config = {
             {
                 test: /\.(js|jsx)$/,
                 include: srcPath,
-                loader: 'babel-loader',
-                options: {
-                    presets: [['es2015', {'modules': false}], 'react']
-                }
+                loader: 'babel-loader'
             },
             {
                 test: /\.(sass|scss)$/,

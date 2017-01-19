@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar} from 'react-toolbox/lib/app_bar';
 
-const Header = () =>
-    <AppBar>That's app bar</AppBar>;
+const Header = (props) =>
+    <AppBar>{props.title}</AppBar>;
 
 export default Header;
