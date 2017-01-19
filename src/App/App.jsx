@@ -1,14 +1,11 @@
 import React from 'react';
 import 'react-toolbox/lib/commons.scss';
 import styles from './style.scss';
-import Header from './header/Header.jsx';
-import {observable} from 'mobx';
+import Header from './Header/Header.jsx';
 import {observer} from 'mobx-react';
-
-class AppStore {
-    @observable title = 'Hello!';
-}
-const globalStore = new AppStore();
+import {AppStore} from "./AppStore";
+import {defaultAppMock} from "./mock/appMock";
+import GuestList from "./GuestList/GuestList.jsx";
 
 @observer
 class App extends React.Component {
@@ -17,12 +14,16 @@ class App extends React.Component {
         return (
             <div>
                 <Header title={store.title}></Header>
+                <GuestList guests={store.guests}></GuestList>
                 <div className={styles.helloHeader}>
                     Hello World
                 </div>
             </div>);
     }
 }
+
+//const globalStore = new AppStore();
+const globalStore = defaultAppMock;
 
 const GlobalApp = () =>
     <App store={globalStore}></App>;
