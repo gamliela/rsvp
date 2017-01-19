@@ -1,13 +1,14 @@
 import React from 'react';
 import 'react-toolbox/lib/commons.scss';
 import styles from './style.scss';
-import Header from './header/header.jsx';
+import Header from './header/Header.jsx';
 import {observable} from 'mobx';
 import {observer} from 'mobx-react';
 
 class AppStore {
     @observable title = 'Hello!';
 }
+const globalStore = new AppStore();
 
 @observer
 class App extends React.Component {
@@ -23,7 +24,7 @@ class App extends React.Component {
     }
 }
 
-const StatefulApp = () =>
-    <App store={new AppStore()}></App>;
+const GlobalApp = () =>
+    <App store={globalStore}></App>;
 
-export default StatefulApp;
+export default GlobalApp;
