@@ -7,7 +7,7 @@ const buildPath = path.join(projectPath, 'build');
 const srcPath = path.join(projectPath, 'src');
 
 const config = {
-    entry: path.join(srcPath, 'index.js'),
+    entry: path.join(srcPath, 'index.jsx'),
     output: {
         filename: 'bundle.js',
         path: buildPath
