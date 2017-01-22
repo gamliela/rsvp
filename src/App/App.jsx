@@ -14,10 +14,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header title={store.title}></Header>
-                <GuestList guests={store.guests}></GuestList>
-                <div className={styles.helloHeader}>
-                    Hello World
-                </div>
+                <GuestList guests={store.guests} className={styles.ModifiedGuestCardList}></GuestList>
             </div>);
     }
 }

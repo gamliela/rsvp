@@ -1,3 +1,4 @@
-.helloHeader {
-  background-color: red;
+.ModifiedGuestCardList {
+  composes: GuestCardList from "./GuestList/style.scss";
+  display: block;
 }
