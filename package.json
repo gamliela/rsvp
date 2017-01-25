@@ -1,7 +1,7 @@
 {
   "name": "rsvp",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.jsx",
   "repository": "https://github.com/gamliela/rsvp.git",
   "author": "gamliela <alon@gamliela.com>",
   "license": "MIT",
