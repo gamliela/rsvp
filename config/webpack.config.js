@@ -56,7 +56,7 @@ const config = {
             template: path.join(srcPath, 'index.html')
         })
     ],
-    devtool: 'cheap-eval-source-map'
+    devtool: 'eval-source-map'
 };
 
 module.exports = config;
