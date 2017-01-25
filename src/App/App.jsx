@@ -1,11 +1,10 @@
 import React from 'react';
-import 'react-toolbox/lib/commons.scss';
 import styles from './style.scss';
 import Header from './Header/Header.jsx';
 import {observer} from 'mobx-react';
 import {AppStore} from "./AppStore";
 import {defaultAppMock} from "./mock/appMock";
-import GuestList from "./GuestList/GuestList.jsx";
+import GuestCardList from "./GuestList/GuestList.jsx";
 
 @observer
 class App extends React.Component {
@@ -14,7 +13,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header title={store.title}></Header>
-                <GuestList guests={store.guests} className={styles.ModifiedGuestCardList}></GuestList>
+                <GuestCardList guests={store.guests} className={styles.GuestCardList}></GuestCardList>
             </div>);
     }
 }

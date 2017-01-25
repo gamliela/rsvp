@@ -1,4 +1,10 @@
 .GuestCardList {
   display: flex;
-  color: blue;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: auto;
+  margin: 20px;
+  white-space: nowrap;
 }

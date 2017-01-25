@@ -1,4 +1,3 @@
-.ModifiedGuestCardList {
+.GuestCardList {
   composes: GuestCardList from "./GuestList/style.scss";
-  display: block;
 }
