@@ -12,6 +12,7 @@ angular.module('myApp.main')
 			this.isEdit = false;
 			this.isSaving = false;
 			this.saveError = false;
+			this.editAllowed = config.editAllowed || false;
 
 			// edit operation
 			this.edit = function () {

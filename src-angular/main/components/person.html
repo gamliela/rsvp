@@ -15,7 +15,7 @@
 		{{$ctrl.props.person.handledBy}}
 	</div>
 	<div class="col ops">
-		<span class="link" ng-show="!$ctrl.isEdit" ng-click="$ctrl.edit()">
+		<span class="link" ng-if="$ctrl.editAllowed" ng-show="!$ctrl.isEdit" ng-click="$ctrl.edit()">
 			עריכה
 		</span>
 	</div>
