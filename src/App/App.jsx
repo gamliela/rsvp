@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './style.scss';
 import Header from './Header/Header.jsx';
 import {observer} from 'mobx-react';
 import {AppStore} from "./AppStore";
@@ -13,7 +12,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header title={store.title}></Header>
-                <GuestCardList guests={store.guests} className={styles.GuestCardList}></GuestCardList>
+                <GuestCardList guests={store.guests}></GuestCardList>
             </div>);
     }
 }

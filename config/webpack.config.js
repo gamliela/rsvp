@@ -29,6 +29,7 @@ const config = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
+                            importLoaders: 1,   // make sure sass-loader is used on imported assets
                             localIdentName: '[local]---[hash:base64:5]'
                         }
                     },
@@ -56,7 +57,7 @@ const config = {
             template: path.join(srcPath, 'index.html')
         })
     ],
-    devtool: 'eval-source-map'
+    devtool: 'source-map'
 };
 
 module.exports = config;
