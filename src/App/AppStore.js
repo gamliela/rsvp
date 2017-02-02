@@ -1,4 +1,4 @@
-import {observable, extendObservable, action} from 'mobx';
+import {observable, extendObservable, action, computed} from 'mobx';
 
 export class AppStore {
     @observable title;
@@ -18,10 +18,21 @@ export class Guest {
     }
 
     @action.bound
-    updateStatus(newTableNumber, newNumGuests, newArrivalTime, newHandledBy) {
-        this.newTableNumber = newTableNumber;
-        this.newNumGuests = newNumGuests;
-        this.newArrivalTime = newArrivalTime;
-        this.newHandledBy = newHandledBy;
+    update({tableNumber, numGuests, arrivalTimeTruncated, handledBy}) {
+        this.newTableNumber = tableNumber;
+        this.newNumGuests = numGuests;
+        this.newArrivalTime = arrivalTimeTruncated && (arrivalTimeTruncated + ":00");
+        this.newHandledBy = handledBy;
+    }
+
+    @computed get view() {
+        let truncateSeconds = s => s.substring(0, s.length - 3);
+        return {
+            name: this.name,
+            tableNumber: typeof(this.newTableNumber) === "string" ? this.newTableNumber : (this.tableNumber || ''),
+            numGuests: typeof(this.newNumGuests) === "string" ? this.newNumGuests : (this.numGuests || ''),
+            arrivalTimeTruncated: typeof(this.newArrivalTime) === "string" ? truncateSeconds(this.newArrivalTime) : '',
+            handledBy: typeof(this.newHandledBy) === "string" ? this.newHandledBy : ''
+        }
     }
 }

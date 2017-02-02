@@ -11,4 +11,8 @@
   .filler {
     flex: 1;
   }
+
+  &.arrived {
+    background-color: rgba(145, 255, 100, 0.26);
+  }
 }

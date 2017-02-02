@@ -20,21 +20,23 @@ class GuestCard extends React.Component {
 
     render() {
         let guest = this.props.guest;
+        let view = guest.view;
 
         let editDialog = this.editorOpened && <EditGuestDialog guest={guest} active={true}
                                                                closeEditor={this.closeEditor}></EditGuestDialog>;
 
         return (
-            <Card theme={style}>
+            <Card theme={style} className={view.arrivalTimeTruncated && style.arrived}>
                 <CardTitle
-                    title={guest.name}
-                    subtitle={"שולחן " + guest.tableNumber}
+                    title={view.name}
+                    subtitle={"שולחן " + view.tableNumber}
                 />
-                <CardText>{guest.numGuests} אורחים</CardText>
+                <CardText>{view.numGuests} מוזמנים</CardText>
                 <CardActions>
                     <div className={style.filler}></div>
+                    <span>{view.arrivalTimeTruncated}</span>
                     <Button icon='edit' primary mini onClick={this.openEditor}/>
-                    <Button icon='done' floating primary mini/>
+                    {!view.arrivalTimeTruncated && <Button icon='done' floating primary mini/>}
                 </CardActions>
                 {editDialog}
             </Card>
