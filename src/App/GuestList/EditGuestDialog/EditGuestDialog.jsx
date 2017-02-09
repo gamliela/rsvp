@@ -3,18 +3,12 @@ import {observer} from 'mobx-react';
 import {Dialog} from 'react-toolbox/lib/dialog';
 import {observable, action} from "mobx";
 import {InputRTL} from "../../../shared/react-toolbox-rtl/InputRTL.jsx";
-
-const padding = function (s) {
-    s += "";
-    return s.length === 1 ? "0" + s : s;
-};
+import {Guest} from "../../AppStore";
 
 const createEditedGuest = function (guest) {
-    let res = guest.view;
-    let now = new Date();
-    if (!res.arrivalTimeTruncated)
-        res.arrivalTimeTruncated = padding(now.getHours()) + ":" + padding(now.getMinutes())
-    return res;
+    let res = new Guest(guest);
+    res.updateDefault();
+    return res.view;
 };
 
 @observer

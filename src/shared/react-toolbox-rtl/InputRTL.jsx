@@ -4,7 +4,8 @@ import theme from './theme.scss';
 
 export class InputRTL extends React.Component {
     render() {
-        return <Input {...this.props} theme={theme} ref={this.setRef}/>
+        let mergedTheme = Object.assign({}, theme, this.props.theme);
+        return <Input {...this.props} theme={mergedTheme} ref={this.setRef}/>
     }
 
     setRef = (input) => {

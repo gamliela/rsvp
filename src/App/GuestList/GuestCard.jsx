@@ -5,6 +5,7 @@ import {Button} from 'react-toolbox/lib/button';
 import style from "./style.scss";
 import {observable, action, extendObservable} from "mobx";
 import EditGuestDialog from './EditGuestDialog/EditGuestDialog.jsx'
+import config from "../../shared/config/config";
 
 @observer
 class GuestCard extends React.Component {
@@ -12,11 +13,15 @@ class GuestCard extends React.Component {
 
     @action.bound openEditor() {
         this.editorOpened = true;
-    }
+    };
 
     @action.bound closeEditor() {
         this.editorOpened = false;
-    }
+    };
+
+    onDoneClick = () => {
+        this.props.guest.updateDefault();
+    };
 
     render() {
         let guest = this.props.guest;
@@ -24,9 +29,8 @@ class GuestCard extends React.Component {
 
         let editDialog = this.editorOpened && <EditGuestDialog guest={guest} active={true}
                                                                closeEditor={this.closeEditor}></EditGuestDialog>;
-
         return (
-            <Card theme={style} className={view.arrivalTimeTruncated && style.arrived}>
+            <Card theme={style} className={guest.arrived && style.arrived}>
                 <CardTitle
                     title={view.name}
                     subtitle={"שולחן " + view.tableNumber}
@@ -35,8 +39,8 @@ class GuestCard extends React.Component {
                 <CardActions>
                     <div className={style.filler}></div>
                     <span>{view.arrivalTimeTruncated}</span>
-                    <Button icon='edit' primary mini onClick={this.openEditor}/>
-                    {!view.arrivalTimeTruncated && <Button icon='done' floating primary mini/>}
+                    {config.editAllowed && <Button icon='edit' primary mini onClick={this.openEditor}/>}
+                    {config.editAllowed && !guest.arrived && <Button icon='done' floating primary mini onClick={this.onDoneClick}/>}
                 </CardActions>
                 {editDialog}
             </Card>

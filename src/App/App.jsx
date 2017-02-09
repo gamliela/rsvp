@@ -1,9 +1,12 @@
 import React from 'react';
 import Header from './Header/Header.jsx';
 import {observer} from 'mobx-react';
-import {AppStore} from "./AppStore";
+import appStore from "./AppStore";
 import {defaultAppMock} from "./mock/appMock";
 import GuestCardList from "./GuestList/GuestList.jsx";
+import config from '../shared/config/config.js';
+import {Snackbar} from 'react-toolbox/lib/snackbar';
+import {ProgressBar} from 'react-toolbox/lib/progress_bar';
 
 @observer
 class App extends React.Component {
@@ -11,13 +14,19 @@ class App extends React.Component {
         let store = this.props.store;
         return (
             <div>
-                <Header title={store.title}></Header>
-                <GuestCardList guests={store.guests}></GuestCardList>
+                { config.isLoadingNow && <ProgressBar type="linear" mode="indeterminate" /> }
+                { config.isLoadingSuccess && <Header title={store.title} filter={store.filter} updateFilter={store.updateFilter}></Header> }
+                { config.isLoadingSuccess && <GuestCardList guests={store.guests}></GuestCardList> }
+                <Snackbar
+                    active={config.isLoadingError}
+                    label={'שגיאה - בדוק תקשורת לשרת'}
+                    type='warning'
+                />
             </div>);
     }
 }
 
-//const globalStore = new AppStore();
+//const globalStore = appStore;
 const globalStore = defaultAppMock;
 
 const GlobalApp = () =>

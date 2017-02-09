@@ -1,9 +1,26 @@
 import {observable, extendObservable, action, computed} from 'mobx';
+import Config from "../shared/config/config.js";
 
 export class AppStore {
     @observable title;
     @observable guests = [];
+    @observable filter = '';
+
+    @action.bound
+    updateFilter(filter) {
+        this.filter = filter;
+    }
 }
+
+const padding = function (s) {
+    s += "";
+    return s.length === 1 ? "0" + s : s;
+};
+
+const nowString = function() {
+    let now = new Date();
+    return padding(now.getHours()) + ":" + padding(now.getMinutes()) + ":" + padding(now.getSeconds());
+};
 
 export class Guest {
     constructor(other) {
@@ -25,6 +42,22 @@ export class Guest {
         this.newHandledBy = handledBy;
     }
 
+    @action.bound
+    updateDefault() {
+        if (!this.newTableNumber)
+            this.newTableNumber = this.tableNumber;
+        if (!this.newNumGuests)
+            this.newNumGuests = this.numGuests;
+        if (!this.newArrivalTime)
+            this.newArrivalTime = nowString();
+        if (!this.newHandledBy)
+            this.newHandledBy = Config.operatorName;
+    }
+
+    @computed get arrived() {
+        return this.newArrivalTime && this.newArrivalTime.length;
+    }
+
     @computed get view() {
         let truncateSeconds = s => s.substring(0, s.length - 3);
         return {
@@ -36,3 +69,5 @@ export class Guest {
         }
     }
 }
+
+export default new AppStore();
