@@ -17,7 +17,7 @@ class App extends React.Component {
                 { config.isLoadingNow && <ProgressBar type="linear" mode="indeterminate"/> }
                 { config.isLoadingSuccess &&
                 <Header title={store.title} filter={store.filter} updateFilter={store.updateFilter}></Header> }
-                { config.isLoadingSuccess && <GuestCardList guests={store.guests}></GuestCardList> }
+                { config.isLoadingSuccess && <GuestCardList guests={store.guests} filter={store.filter}></GuestCardList> }
                 <Snackbar
                     active={config.isLoadingError}
                     label={'שגיאה - בדוק תקשורת לשרת'}
