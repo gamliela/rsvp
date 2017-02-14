@@ -1,11 +1,10 @@
 import React from 'react';
-import {Input} from 'react-toolbox/lib/input';
-import theme from './theme.scss';
+import Input from 'react-toolbox/lib/input/Input.js';
+import {rtl} from './input.scss';
 
 export class InputRTL extends React.Component {
     render() {
-        let mergedTheme = Object.assign({}, theme, this.props.theme);
-        return <Input {...this.props} theme={mergedTheme} ref={this.setRef}/>
+        return <Input {...this.props} className={rtl} ref={this.setRef}/>
     }
 
     setRef = (input) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import {AppBar} from 'react-toolbox/lib/app_bar';
 import {InputRTL} from "../../shared/react-toolbox-rtl/InputRTL.jsx";
-//import {Input} from 'react-toolbox/lib/input';
 
 import style from "./style.scss";
 

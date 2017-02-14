@@ -1,14 +1,20 @@
-.input {
+@import "~react-toolbox/lib/input/theme.scss";
+
+.input.rtl {
+
   &.withIcon {
     margin-left: 0;
     margin-right: 4.8rem;
   }
+
   .label {
     left: auto;
     right: 0;
   }
+
   .icon {
     left: auto;
     right: -4.8rem;
   }
+
 }

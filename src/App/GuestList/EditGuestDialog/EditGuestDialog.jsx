@@ -25,8 +25,8 @@ class EditGuestDialog extends React.Component {
     };
 
     dialogActions = [
-        { label: "ביטול", onClick: this.props.closeEditor },
-        { label: "שמירה", onClick: this.save }
+        {label: "ביטול", onClick: this.props.closeEditor},
+        {label: "שמירה", onClick: this.save}
     ];
 
     render() {
