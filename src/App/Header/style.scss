@@ -1,7 +1,10 @@
 .appBar {
+
   .title {
     flex-grow: 1;
   }
+
+  /* filter query */
   .input {
     flex-grow: 2;
     .inputElement {
@@ -13,7 +16,28 @@
     .bar {
       display: none;
     }
+    .icon {
+      color: rgba(224, 236, 255, 0.24);
+    }
   }
+
+  .clear {
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+
+  /* filter checkbox */
+  .field {
+    margin-bottom: 0;
+    margin-right: 1rem;
+    .text {
+      color: rgba(224, 236, 255, 0.24);
+    }
+    .check {
+      border-color: rgba(224, 236, 255, 0.24);
+    }
+  }
+
   .info {
     flex-grow: 1;
     text-align: left;

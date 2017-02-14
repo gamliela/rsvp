@@ -5,11 +5,14 @@ import {nowString} from "../shared/util";
 export class AppStore {
     @observable title;
     @observable guests = [];
-    @observable filter = '';
+    @observable filter = {
+        query: "",
+        missingOnly: false
+    };
 
     @action.bound
     updateFilter(filter) {
-        this.filter = filter;
+        this.filter = {...filter};
     }
 }
 
