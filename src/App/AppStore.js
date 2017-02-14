@@ -14,6 +14,14 @@ export class AppStore {
     updateFilter(filter) {
         this.filter = {...filter};
     }
+
+    @computed get totalGuests() {
+        return this.guests.length;
+    }
+
+    @computed get totalArrived() {
+        return this.guests.filter(guest => guest.arrived).length;
+    }
 }
 
 export class Guest {

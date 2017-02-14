@@ -7,7 +7,7 @@ import {Clock} from "./Clock/Clock.jsx";
 import {CheckboxRTL} from "../../shared/react-toolbox-rtl/CheckboxRTL.jsx";
 import style from "./style.scss";
 
-const Header = observer(({title, filter, updateFilter}) => {
+const Header = observer(({title, filter, updateFilter, totalArrived, totalGuests}) => {
 
     let onQueryChange = s => updateFilter({...filter, query: s});
     let onMissingOnlyChange = b => updateFilter({...filter, missingOnly: b});
@@ -17,6 +17,7 @@ const Header = observer(({title, filter, updateFilter}) => {
             <FontIcon className={style.clear} value={filter.query && "clear"} onClick={onQueryChange.bind(this, '')}></FontIcon>
             <InputRTL type='text' value={filter.query} onChange={onQueryChange} theme={style}/>
             <CheckboxRTL checked={filter.missingOnly} theme={style} onChange={onMissingOnlyChange} label="חסרים בלבד"/>
+            <div className={style.counter}>הגיעו: {totalArrived}/{totalGuests}</div>
             <div className={style.info}>
                 <Clock></Clock>
             </div>

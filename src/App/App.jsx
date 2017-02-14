@@ -16,8 +16,15 @@ class App extends React.Component {
             <div>
                 { config.isLoadingNow && <ProgressBar type="linear" mode="indeterminate"/> }
                 { config.isLoadingSuccess &&
-                <Header title={store.title} filter={store.filter} updateFilter={store.updateFilter}></Header> }
-                { config.isLoadingSuccess && <GuestCardList guests={store.guests} filter={store.filter}></GuestCardList> }
+                <Header
+                    title={store.title}
+                    filter={store.filter}
+                    updateFilter={store.updateFilter}
+                    totalGuests={store.totalGuests}
+                    totalArrived={store.totalArrived}>
+                </Header> }
+                { config.isLoadingSuccess &&
+                <GuestCardList guests={store.guests} filter={store.filter}></GuestCardList> }
                 <Snackbar
                     active={config.isLoadingError}
                     label={'שגיאה - בדוק תקשורת לשרת'}
