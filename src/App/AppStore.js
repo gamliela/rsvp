@@ -1,5 +1,6 @@
 import {observable, extendObservable, action, computed} from 'mobx';
 import Config from "../shared/config/config.js";
+import {nowString} from "../shared/util";
 
 export class AppStore {
     @observable title;
@@ -11,16 +12,6 @@ export class AppStore {
         this.filter = filter;
     }
 }
-
-const padding = function (s) {
-    s += "";
-    return s.length === 1 ? "0" + s : s;
-};
-
-const nowString = function() {
-    let now = new Date();
-    return padding(now.getHours()) + ":" + padding(now.getMinutes()) + ":" + padding(now.getSeconds());
-};
 
 export class Guest {
     constructor(other) {
