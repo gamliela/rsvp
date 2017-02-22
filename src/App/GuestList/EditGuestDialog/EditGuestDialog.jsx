@@ -37,7 +37,7 @@ class EditGuestDialog extends React.Component {
             onEscKeyDown={this.props.closeEditor}
             onOverlayClick={this.props.closeEditor}>
             <InputRTL type="text" label="מספר שולחן" name="tableNumber" value={this.editedGuest.tableNumber}
-                      onChange={this.updateField.bind(this, 'tableNumber')} ref={this.setFirstInput}/>
+                      onChange={this.updateField.bind(this, 'tableNumber')} innerRef={this.setFirstInput}/>
             <InputRTL type="text" label="כמות מוזמנים" name="numGuests" value={this.editedGuest.numGuests}
                       onChange={this.updateField.bind(this, 'numGuests')}/>
             <InputRTL type="text" label="זמן הגעה" name="arrivalTimeTruncated"
