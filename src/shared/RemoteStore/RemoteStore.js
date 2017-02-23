@@ -1,83 +1,31 @@
-import {observable, extendObservable, action, computed} from 'mobx';
-
-export const Status = {
-    EMPTY: 1,
-    LOADING: 2,
-    LOADED: 3,
-    ERROR: 4
-};
-
-function checkStatus(response) {
-    if (response.ok) {
-        return response
-    } else {
-        let error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-    }
-}
-
-function parseJSON(response) {
-    return response.json()
-}
+import {computed} from 'mobx';
+import {fetchJson} from "../util-server";
+import {fromPromise, PENDING, FULFILLED, REJECTED} from "mobx-utils";
 
 export class RemoteStore {
-    @observable status = Status.LOADING;
-    @observable data = null;
-    @observable err = null;
 
-    constructor(url, parseFunction) {
-        if (window.fetch)
-            window.fetch(url)
-                .then(checkStatus)
-                .then(parseFunction)
-                .then(this.emitData)
-                .catch(this.emitError);
-        else
-            this.emitError("fetch is not supported");
+    constructor(fetchResult) {
+        this.promise = fromPromise(fetchResult);
     }
 
-    @computed get errorMessage() {
-        if (this.status == Status.ERROR) {
-            if (typeof(this.err) === 'string')
-                return this.err;
-            else if ((typeof(this.err) === 'object') && (typeof(this.err.message) === 'string'))
-                return this.err.message;
-            else
-                return '';
-        }
-    }
-
-    @action.bound emitData(data) {
-        this.status = Status.LOADED;
-        this.data = data || {};
-    }
-
-    @action.bound emitError(err) {
-        this.status = Status.ERROR;
-        this.err = err || "";
-    }
-
-    @computed get isLoadingNow() {
-        return this.status === Status.LOADING;
+    @computed get isLoading() {
+        return this.promise.state == PENDING;
     }
 
     @computed get isLoadingSuccess() {
-        return this.status === Status.LOADED;
+        return this.promise.state == FULFILLED;
     }
 
     @computed get isLoadingError() {
-        return this.status === Status.ERROR;
-    }
-
-    @computed get isLoadingCompleted() {
-        return this.status === Status.LOADED || this.status === Status.ERROR;
+        return this.promise.state == REJECTED;
     }
 
 }
 
 export class RemoteJsonStore extends RemoteStore {
+
     constructor(url) {
-        super(url, parseJSON);
+        super(fetchJson(url));
     }
+
 }

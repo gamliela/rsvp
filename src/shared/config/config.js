@@ -1,5 +1,5 @@
-import {observable, extendObservable, action, computed} from 'mobx';
-import {RemoteJsonStore} from "../RemoteStore/RemoteStore.js";
+import {computed, when} from 'mobx';
+import {RemoteJsonStore} from "../RemoteStore/RemoteStore";
 
 export class ConfigStore extends RemoteJsonStore {
 
@@ -8,24 +8,29 @@ export class ConfigStore extends RemoteJsonStore {
     }
 
     @computed get operatorName() {
-        return this.isLoadingSuccess && this.data.operatorName;
+        return this.isLoadingSuccess && this.promise.value.operatorName;
     }
 
     @computed get accessUrl() {
-        return this.isLoadingSuccess && this.data.accessUrl;
+        return this.isLoadingSuccess && this.promise.value.accessUrl;
     }
 
     @computed get accessCode() {
-        return this.isLoadingSuccess && this.data.accessCode;
+        return this.isLoadingSuccess && this.promise.value.accessCode;
     }
 
     @computed get editAllowed() {
-        return this.isLoadingSuccess && this.data.editAllowed;
+        return this.isLoadingSuccess && this.promise.value.editAllowed;
     }
 
 }
 
 // expose config.json in build
-var url = require("file-loader?name=[name].[ext]!./config.json");
+const url = require("file-loader?name=[name].[ext]!./config.json");
 
-export default new ConfigStore(url);
+export const globalConfig = new ConfigStore(url);
+
+export default globalConfig;
+
+// make sure loading error is presented
+when(() => globalConfig.isLoadingError, () => console.error(globalConfig.promise.value));
