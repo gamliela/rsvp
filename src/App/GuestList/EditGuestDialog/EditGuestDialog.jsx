@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 import {Dialog} from 'react-toolbox/lib/dialog';
 import {observable, action} from "mobx";
 import {InputRTL} from "../../../shared/react-toolbox-rtl/InputRTL.jsx";
-import {Guest} from "../../AppStore";
+import Guest from "../../Guest.js";
 
 const createEditedGuest = function (guest) {
     let res = new Guest(guest);

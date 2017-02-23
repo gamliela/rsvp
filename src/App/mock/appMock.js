@@ -1,4 +1,5 @@
-import {AppStore, Guest} from "../AppStore";
+import {AppStore} from "../AppStore";
+import Guest from "../Guest";
 
 const defaultAppMock = new AppStore();
 defaultAppMock.title = "החתונה של דני ומיכל";
