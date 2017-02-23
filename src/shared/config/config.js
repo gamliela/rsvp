@@ -1,5 +1,5 @@
 import {observable, extendObservable, action, computed} from 'mobx';
-import {RemoteJsonStore} from "./RemoteStore";
+import {RemoteJsonStore} from "../RemoteStore/RemoteStore.js";
 
 export class ConfigStore extends RemoteJsonStore {
 
