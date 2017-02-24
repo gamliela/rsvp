@@ -3,24 +3,20 @@ import {RemoteJsonStore} from "../RemoteStore/RemoteStore";
 
 export class ConfigStore extends RemoteJsonStore {
 
-    constructor() {
-        super(url);
-    }
-
     @computed get operatorName() {
-        return this.isLoadingSuccess && this.promise.value.operatorName;
+        return this.promise.value.operatorName;
     }
 
     @computed get accessUrl() {
-        return this.isLoadingSuccess && this.promise.value.accessUrl;
+        return this.promise.value.accessUrl;
     }
 
     @computed get accessCode() {
-        return this.isLoadingSuccess && this.promise.value.accessCode;
+        return this.promise.value.accessCode;
     }
 
     @computed get editAllowed() {
-        return this.isLoadingSuccess && this.promise.value.editAllowed;
+        return this.promise.value.editAllowed;
     }
 
 }

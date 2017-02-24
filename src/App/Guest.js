@@ -1,5 +1,5 @@
 import {observable, extendObservable, action, computed} from 'mobx';
-import Config from "../shared/config/config.js";
+import config from "../shared/config/config.js";
 import {nowString} from "../shared/util";
 
 export default class Guest {
@@ -31,7 +31,7 @@ export default class Guest {
         if (!this.newArrivalTime)
             this.newArrivalTime = nowString();
         if (!this.newHandledBy)
-            this.newHandledBy = Config.operatorName;
+            this.newHandledBy = config.operatorName;
     }
 
     @computed get arrived() {
