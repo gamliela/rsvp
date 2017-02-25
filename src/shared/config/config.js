@@ -29,4 +29,7 @@ export const globalConfig = new ConfigStore(url);
 export default globalConfig;
 
 // make sure loading error is presented
-when(() => globalConfig.isLoadingError, () => console.error(globalConfig.promise.value));
+when(
+    () => globalConfig.isLoadingError,
+    () => console.error(globalConfig.promise.value)
+);
