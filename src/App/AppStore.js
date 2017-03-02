@@ -1,6 +1,7 @@
 import {observable, action, computed, when} from 'mobx';
 import {fetchLastEvent} from "../shared/server/server";
 import {AsyncStore} from "../shared/mobx-tools/AsyncStore";
+import config from "../shared/config/config";
 
 export class AppStore extends AsyncStore {
     @observable filter = {
@@ -9,7 +10,9 @@ export class AppStore extends AsyncStore {
     };
 
     constructor(useMockData) {
-        super(fetchLastEvent(useMockData));
+        // although config is not used in this class, it is still required by many other children.
+        // so it's better to make sure it is loaded instead of checking it on every child.
+        super(fetchLastEvent(useMockData), [config]);
     }
 
     @action.bound
@@ -34,7 +37,7 @@ export class AppStore extends AsyncStore {
     }
 }
 
-const useMockData = false;
+export const useMockData = false;
 
 export const appStore = new AppStore(useMockData);
 

@@ -3,12 +3,16 @@ import {observer} from 'mobx-react';
 import {Dialog} from 'react-toolbox/lib/dialog';
 import {observable, action} from "mobx";
 import {InputRTL} from "../../../shared/react-toolbox-rtl/InputRTL.jsx";
-import Guest from "../../Guest.js";
+import {truncateSeconds, nowString} from "../../../shared/util";
+import config from "../../../shared/config/config.js";
 
 const createEditedGuest = function (guest) {
-    let res = new Guest(guest);
-    res.updateDefault();
-    return res.view;
+    const view = guest.view;
+    if (!view.arrivalTimeTruncated)
+        view.arrivalTimeTruncated = truncateSeconds(nowString());
+    if (!view.handledBy)
+        view.handledBy = config.operatorName;
+    return view;
 };
 
 @observer
@@ -20,7 +24,7 @@ class EditGuestDialog extends React.Component {
     }
 
     save = () => {
-        this.props.guest.update(this.editedGuest);
+        this.props.guest.save(this.editedGuest);
         this.props.closeEditor();
     };
 

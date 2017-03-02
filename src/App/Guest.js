@@ -1,8 +1,14 @@
 import {observable, extendObservable, action, computed} from 'mobx';
 import config from "../shared/config/config.js";
-import {nowString} from "../shared/util";
+import {nowString, truncateSeconds} from "../shared/util";
+import * as server from "../shared/server/server";
+import {useMockData} from "./AppStore";
 
 export default class Guest {
+
+    @observable isSaving = false;
+    @observable isSavingError = false;
+
     constructor(other) {
         extendObservable(this, {guestId: other.guestId});
         extendObservable(this, {name: other.name});
@@ -15,23 +21,43 @@ export default class Guest {
     }
 
     @action.bound
-    update({tableNumber, numGuests, arrivalTimeTruncated, handledBy}) {
-        this.newTableNumber = tableNumber;
-        this.newNumGuests = numGuests;
-        this.newArrivalTime = arrivalTimeTruncated && (arrivalTimeTruncated + ":00");
-        this.newHandledBy = handledBy;
+    save(guestData) {
+        if (!this.isSaving) {
+            this.isSaving = true;
+            this.isSavingError = false;
+
+            const newData = {
+                guestId: this.guestId,
+                newTableNumber: guestData.tableNumber,
+                newNumGuests: guestData.numGuests,
+                newArrivalTime: guestData.arrivalTimeTruncated && (guestData.arrivalTimeTruncated + ":00"),
+                newHandledBy: guestData.handledBy
+            };
+
+            server
+                .submitGuest(newData, useMockData)
+                .then(action(() => {
+                    this.isSaving = false;
+                    this.newTableNumber = newData.newTableNumber || undefined;
+                    this.newNumGuests = newData.newNumGuests || undefined;
+                    this.newArrivalTime = newData.newArrivalTime || undefined;
+                    this.newHandledBy = newData.newHandledBy || undefined;
+                }))
+                .catch(action((error) => {
+                    this.isSaving = false;
+                    this.isSavingError = true;
+                    console.log(`guest ${this.guestId} cannot be saved.`, error);
+                }));
+        }
     }
 
-    @action.bound
-    updateDefault() {
-        if (!this.newTableNumber)
-            this.newTableNumber = this.tableNumber;
-        if (!this.newNumGuests)
-            this.newNumGuests = this.numGuests;
-        if (!this.newArrivalTime)
-            this.newArrivalTime = nowString();
-        if (!this.newHandledBy)
-            this.newHandledBy = config.operatorName;
+    saveDefault() {
+        this.save({
+            tableNumber: this.newTableNumber || this.tableNumber,
+            numGuests: this.newNumGuests || this.numGuests,
+            arrivalTimeTruncated: truncateSeconds(this.newArrivalTime || nowString()),
+            handledBy: this.newHandledBy || config.operatorName,
+        });
     }
 
     @computed get arrived() {
@@ -39,7 +65,6 @@ export default class Guest {
     }
 
     @computed get view() {
-        let truncateSeconds = s => s.substring(0, s.length - 3);
         return {
             name: this.name,
             tableNumber: typeof(this.newTableNumber) === "string" ? this.newTableNumber : (this.tableNumber || ''),

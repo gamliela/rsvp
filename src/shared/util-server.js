@@ -4,9 +4,9 @@ export function encodeQueryData(data) {
     return Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
 }
 
-export function fetchContent(url) {
+export function fetchContent(url, options) {
     if (window.fetch)
-        return window.fetch(url).then(response => {
+        return window.fetch(url, options).then(response => {
             if (response.ok) {
                 return response
             } else {
@@ -19,6 +19,6 @@ export function fetchContent(url) {
         return Promise.reject(new Error("fetch is not supported"));
 }
 
-export function fetchJson(url) {
-    return fetchContent(url).then(content => content.json());
+export function fetchJson(url, options) {
+    return fetchContent(url, options).then(content => content.json());
 }

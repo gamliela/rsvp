@@ -1,3 +1,5 @@
+export const delay = 500;
+
 export const lastEvent = {
     "event": {
         "event_id": 1,
@@ -61,7 +63,8 @@ export const lastEvent = {
 };
 
 export const actions = {
-    "query-last-event": lastEvent
+    "query-last-event": lastEvent,
+    "submit-guest": {}
 };
 
 export default actions;

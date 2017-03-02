@@ -1,6 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import {Card, CardTitle, CardText, CardActions} from 'react-toolbox/lib/card';
+import {ProgressBar} from 'react-toolbox/lib/progress_bar';
 import {Button} from 'react-toolbox/lib/button';
 import style from "./style.scss";
 import {observable, action, extendObservable} from "mobx";
@@ -20,17 +21,19 @@ class GuestCard extends React.Component {
     };
 
     onDoneClick = () => {
-        this.props.guest.updateDefault();
+        this.props.guest.saveDefault();
     };
 
     render() {
-        let guest = this.props.guest;
-        let view = guest.view;
+        const guest = this.props.guest;
+        const view = guest.view;
+        const editDialog = this.editorOpened && <EditGuestDialog guest={guest} active={true}
+                                                                 closeEditor={this.closeEditor}></EditGuestDialog>;
+        const editAllowed = config.editAllowed && !guest.isSaving;
 
-        let editDialog = this.editorOpened && <EditGuestDialog guest={guest} active={true}
-                                                               closeEditor={this.closeEditor}></EditGuestDialog>;
         return (
-            <Card theme={style} className={guest.arrived && style.arrived}>
+            <Card theme={style}
+                  className={`${guest.arrived && style.arrived} ${guest.isSavingError && style.isSavingError}`}>
                 <CardTitle
                     title={view.name}
                     subtitle={"שולחן " + view.tableNumber}
@@ -39,9 +42,11 @@ class GuestCard extends React.Component {
                 <CardActions>
                     <div className={style.filler}></div>
                     <span>{view.arrivalTimeTruncated}</span>
-                    {config.editAllowed && <Button icon='edit' primary mini onClick={this.openEditor}/>}
-                    {config.editAllowed && !guest.arrived && <Button icon='done' floating primary mini onClick={this.onDoneClick}/>}
+                    {editAllowed && <Button icon='edit' primary mini onClick={this.openEditor}/>}
+                    {editAllowed && !guest.arrived &&
+                    <Button icon='done' floating primary mini onClick={this.onDoneClick}/>}
                 </CardActions>
+                {guest.isSaving && <ProgressBar type="linear" mode="indeterminate" className={style.loadingBar}/>}
                 {editDialog}
             </Card>
         )

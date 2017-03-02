@@ -13,7 +13,7 @@ class App extends React.Component {
 
         return (
             <div>
-                { store.isLoadingNow && <ProgressBar type="linear" mode="indeterminate"/> }
+                { store.isLoading && <ProgressBar type="linear" mode="indeterminate"/> }
                 { store.isLoadingSuccess &&
                 <Header
                     title={store.title}

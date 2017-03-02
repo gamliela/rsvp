@@ -7,6 +7,7 @@
   width: auto;
   margin: 20px;
   white-space: nowrap;
+  position: relative;
 
   .filler {
     flex: 1;
@@ -14,5 +15,14 @@
 
   &.arrived {
     background-color: rgba(145, 255, 100, 0.26);
+  }
+
+  &.isSavingError {
+    background-color: rgba(222, 50, 38, 0.37);
+  }
+
+  .loadingBar {
+    position: absolute;
+    bottom: 0;
   }
 }
