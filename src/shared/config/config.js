@@ -1,5 +1,5 @@
 import {computed, when} from 'mobx';
-import {RemoteJsonStore} from "../RemoteStore/RemoteStore";
+import {RemoteJsonStore} from "../mobx-tools/AsyncStore";
 
 export class ConfigStore extends RemoteJsonStore {
 
@@ -31,5 +31,5 @@ export default globalConfig;
 // make sure loading error is presented
 when(
     () => globalConfig.isLoadingError,
-    () => console.error(globalConfig.promise.value)
+    () => console.error("globalConfig cannot be loaded.", globalConfig.promise.value)
 );

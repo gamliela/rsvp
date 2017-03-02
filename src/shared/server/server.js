@@ -3,16 +3,20 @@ import actions from "./serverMockData";
 import {fetchJson, encodeQueryData} from "../util-server";
 import Guest from "../../App/Guest";
 import Event from "../../App/Event";
+import {toPromise} from "../mobx-tools/mobx-tools";
+
+const configPromise = toPromise(config);
 
 function fetchData(action, useMockData) {
-    if (!useMockData) {
-        // TODO: problem: we need to wait for config to resolved...
-        const queryData = encodeQueryData({
-            "access-code": config.accessCode,
-            "action": action
+    if (!useMockData)
+        return configPromise.then(config => {
+            const queryData = encodeQueryData({
+                "access-code": config.accessCode,
+                "action": action
+            });
+            return fetchJson(config.accessUrl + "?" + queryData);
         });
-        return fetchJson(config.accessUrl + "?" + queryData);
-    } else
+    else
         return Promise.resolve(actions[action]);
 }
 

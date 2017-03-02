@@ -6,8 +6,6 @@ import GuestCardList from "./GuestList/GuestList.jsx";
 import {Snackbar} from 'react-toolbox/lib/snackbar';
 import {ProgressBar} from 'react-toolbox/lib/progress_bar';
 
-// TODO: check store communication problems
-
 @observer
 class App extends React.Component {
     render() {
