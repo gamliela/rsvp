@@ -29,11 +29,11 @@ export class AppStore extends AsyncStore {
     }
 
     @computed get totalGuests() {
-        return this.promise.value.guests.length;
+        return this.promise.value.guests.reduce((a, b) => a + b.numGuestsCount, 0);
     }
 
     @computed get totalArrived() {
-        return this.promise.value.guests.filter(guest => guest.arrived).length;
+        return this.promise.value.guests.reduce((a, b) => a + (b.arrived ? b.numGuestsCount : 0), 0);
     }
 }
 

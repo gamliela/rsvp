@@ -64,6 +64,16 @@ export default class Guest {
         return this.newArrivalTime && this.newArrivalTime.length;
     }
 
+    @computed get numGuestsCount() {
+        let res = parseInt(this.newNumGuests);
+        if (!isNaN(res))
+            return Math.max(res,1);
+        res = parseInt(this.numGuests);
+        if (!isNaN(res))
+            return Math.max(res,1);
+        return 1;
+    }
+
     @computed get view() {
         return {
             name: this.name,
