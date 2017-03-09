@@ -1,6 +1,8 @@
 .GuestCardList {
   display: flex;
   flex-wrap: wrap;
+  overflow-y: auto;
+  align-content: flex-start;
 }
 
 .card {
@@ -14,7 +16,7 @@
   }
 
   &.arrived {
-    background-color: rgba(145, 255, 100, 0.26);
+    background-color: #00cc00;
   }
 
   &.isSavingError {
