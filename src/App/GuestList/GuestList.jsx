@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 import GuestCard from './GuestCard.jsx';
 import style from './style.scss';
 
-const GuestCardList = observer(({guests, filter}) => {
+const GuestCardList = observer(({guests, filter, className}) => {
     let query = filter.query;
 
     let filterGuestFunction = guest => (
@@ -13,8 +13,12 @@ const GuestCardList = observer(({guests, filter}) => {
         (!filter.missingOnly || !guest.arrived)
     );
 
+    let mergedClassName = style.GuestCardList;
+    if (className)
+        mergedClassName += " " + className;
+
     return (
-        <div className={style.GuestCardList}>
+        <div className={mergedClassName}>
             {guests
                 .filter(filterGuestFunction)
                 .map(guest => <GuestCard key={guest.guestId} guest={guest}></GuestCard>)}

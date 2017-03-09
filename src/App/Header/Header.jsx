@@ -7,13 +7,13 @@ import {Clock} from "./Clock/Clock.jsx";
 import {CheckboxRTL} from "../../shared/react-toolbox-rtl/CheckboxRTL.jsx";
 import style from "./style.scss";
 
-const Header = observer(({title, filter, updateFilter, totalArrived, totalGuests}) => {
+const Header = observer(({title, filter, updateFilter, totalArrived, totalGuests, className}) => {
 
     let onQueryChange = s => updateFilter({...filter, query: s});
     let onMissingOnlyChange = b => updateFilter({...filter, missingOnly: b});
 
     return (
-        <AppBar title={title} theme={style}>
+        <AppBar title={title} theme={style} className={className}>
             <FontIcon className={style.clear} value={filter.query && "clear"} onClick={onQueryChange.bind(this, '')}></FontIcon>
             <InputRTL type='text' value={filter.query} onChange={onQueryChange} theme={style}/>
             <CheckboxRTL checked={filter.missingOnly} theme={style} onChange={onMissingOnlyChange} label="חסרים בלבד"/>

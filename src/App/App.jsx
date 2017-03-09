@@ -5,6 +5,7 @@ import appStore from "./AppStore";
 import GuestCardList from "./GuestList/GuestList.jsx";
 import {Snackbar} from 'react-toolbox/lib/snackbar';
 import {ProgressBar} from 'react-toolbox/lib/progress_bar';
+import style from './style.scss';
 
 @observer
 class App extends React.Component {
@@ -12,10 +13,11 @@ class App extends React.Component {
         const store = this.props.store;
 
         return (
-            <div>
+            <div className={style.wrapper}>
                 { store.isLoading && <ProgressBar type="linear" mode="indeterminate"/> }
                 { store.isLoadingSuccess &&
                 <Header
+                    className={style.header}
                     title={store.title}
                     filter={store.filter}
                     updateFilter={store.updateFilter}
@@ -23,7 +25,8 @@ class App extends React.Component {
                     totalArrived={store.totalArrived}>
                 </Header> }
                 { store.isLoadingSuccess &&
-                <GuestCardList guests={store.guests} filter={store.filter}></GuestCardList> }
+                <GuestCardList className={style.guestCardList} guests={store.guests}
+                               filter={store.filter}></GuestCardList> }
                 <Snackbar
                     active={store.isLoadingError}
                     label={'שגיאה - בדוק תקשורת לשרת'}
