@@ -11,7 +11,6 @@ import style from './style.scss';
 class App extends React.Component {
     render() {
         const store = this.props.store;
-
         return (
             <div className={style.wrapper}>
                 { store.isLoading && <ProgressBar type="linear" mode="indeterminate"/> }
@@ -25,8 +24,7 @@ class App extends React.Component {
                     totalArrived={store.totalArrived}>
                 </Header> }
                 { store.isLoadingSuccess &&
-                <GuestCardList className={style.guestCardList} guests={store.guests}
-                               filter={store.filter}></GuestCardList> }
+                <GuestCardList className={style.guestCardList} guests={store.guestsFilter}></GuestCardList> }
                 <Snackbar
                     active={store.isLoadingError}
                     label={'שגיאה - בדוק תקשורת לשרת'}

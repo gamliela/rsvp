@@ -28,12 +28,21 @@ export class AppStore extends AsyncStore {
         return this.promise.value.guests;
     }
 
+    @computed get guestsFilter() {
+        return this.guests.filter(guest => (
+            (!this.filter.query ||
+            (guest.view.name && (guest.view.name.indexOf(this.filter.query) != -1)) ||
+            (guest.view.tableNumber && (guest.view.tableNumber.indexOf(this.filter.query) != -1))) &&
+            (!this.filter.missingOnly || !guest.arrived)
+        ));
+    }
+
     @computed get totalGuests() {
-        return this.promise.value.guests.reduce((a, b) => a + b.numGuestsCount, 0);
+        return this.guestsFilter.reduce((a, b) => a + b.numGuestsCount, 0);
     }
 
     @computed get totalArrived() {
-        return this.promise.value.guests.reduce((a, b) => a + (b.arrived ? b.numGuestsCount : 0), 0);
+        return this.guestsFilter.reduce((a, b) => a + (b.arrived ? b.numGuestsCount : 0), 0);
     }
 }
 
