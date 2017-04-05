@@ -18,6 +18,7 @@ export default class Guest {
         extendObservable(this, {newNumGuests: other.newNumGuests});
         extendObservable(this, {newArrivalTime: other.newArrivalTime});
         extendObservable(this, {newHandledBy: other.newHandledBy});
+        extendObservable(this, {comments: other.comments});
     }
 
     @action.bound
@@ -31,7 +32,8 @@ export default class Guest {
                 newTableNumber: guestData.tableNumber,
                 newNumGuests: guestData.numGuests,
                 newArrivalTime: guestData.arrivalTimeTruncated && (guestData.arrivalTimeTruncated + ":00"),
-                newHandledBy: guestData.handledBy
+                newHandledBy: guestData.handledBy,
+                comments: guestData.comments
             };
 
             server
@@ -42,6 +44,7 @@ export default class Guest {
                     this.newNumGuests = newData.newNumGuests || undefined;
                     this.newArrivalTime = newData.newArrivalTime || undefined;
                     this.newHandledBy = newData.newHandledBy || undefined;
+                    this.comments = newData.comments || undefined;
                 }))
                 .catch(action((error) => {
                     this.isSaving = false;
@@ -57,6 +60,7 @@ export default class Guest {
             numGuests: this.newNumGuests || this.numGuests,
             arrivalTimeTruncated: truncateSeconds(this.newArrivalTime || nowString()),
             handledBy: this.newHandledBy || config.operatorName,
+            comments: this.comments
         });
     }
 
@@ -80,7 +84,8 @@ export default class Guest {
             tableNumber: typeof(this.newTableNumber) === "string" ? this.newTableNumber : (this.tableNumber || ''),
             numGuests: typeof(this.newNumGuests) === "string" ? this.newNumGuests : (this.numGuests || ''),
             arrivalTimeTruncated: typeof(this.newArrivalTime) === "string" ? truncateSeconds(this.newArrivalTime) : '',
-            handledBy: typeof(this.newHandledBy) === "string" ? this.newHandledBy : ''
+            handledBy: typeof(this.newHandledBy) === "string" ? this.newHandledBy : '',
+            comments: typeof(this.comments) === "string" ? this.comments : '',
         }
     }
 }

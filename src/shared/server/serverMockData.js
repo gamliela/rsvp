@@ -6,6 +6,7 @@ export const lastEvent = {
         "name": "החתונה של דני ומיכל",
         "event_date": "2017-01-14",
         "location": "אולמי בראשית ירושלים",
+        "comments": "נסיון"
     },
     "guests": [{
         "guest_id": 1,
@@ -15,7 +16,8 @@ export const lastEvent = {
         "new_table_number": "23",
         "new_num_guests": "2",
         "new_arrival_time": "16:20:00",
-        "new_handled_by": "איילת"
+        "new_handled_by": "איילת",
+        "comments": ""
     }, {
         "guest_id": 2,
         "name": "אייל ודניאלה",
@@ -24,22 +26,26 @@ export const lastEvent = {
         "new_table_number": "15",
         "new_num_guests": "2",
         "new_arrival_time": "17:50:00",
-        "new_handled_by": "איילת"
+        "new_handled_by": "איילת",
+        "comments": ""
     }, {
         "guest_id": 3,
         "name": "משפחת אלימלך",
         "table_number": "10",
-        "num_guests": "5"
+        "num_guests": "5",
+        "comments": "אין שום הערות!!"
     }, {
         "guest_id": 4,
         "name": "נורית ירון",
         "table_number": "10",
-        "num_guests": "1"
+        "num_guests": "1",
+        "comments": ""
     }, {
         "guest_id": 5,
         "name": "משפחת מצליח",
         "table_number": "3",
-        "num_guests": "3"
+        "num_guests": "3",
+        "comments": ""
     }, {
         "guest_id": 6,
         "name": "יובל ודנה",
@@ -48,17 +54,20 @@ export const lastEvent = {
         "new_table_number": "23",
         "new_num_guests": "1",
         "new_arrival_time": "16:25:00",
-        "new_handled_by": "איילת"
+        "new_handled_by": "איילת",
+        "comments": ""
     }, {
         "guest_id": 7,
         "name": "משפחת כהן",
         "table_number": "14",
-        "num_guests": "5"
+        "num_guests": "5",
+        "comments": ""
     }, {
         "guest_id": 8,
         "name": "משפחת לוי",
         "table_number": "12",
-        "num_guests": "4"
+        "num_guests": "4",
+        "comments": ""
     }]
 };
 

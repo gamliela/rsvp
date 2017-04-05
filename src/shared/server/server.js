@@ -49,7 +49,8 @@ export function fetchLastEvent(useMockData) {
                 newTableNumber: guest.new_table_number,
                 newNumGuests: typeof(guest.new_num_guests) == 'number' ? guest.new_num_guests.toString() : guest.new_num_guests,
                 newArrivalTime: guest.new_arrival_time,
-                newHandledBy: guest.new_handled_by
+                newHandledBy: guest.new_handled_by,
+                comments: guest.comments
             });
         });
         let event = new Event({

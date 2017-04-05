@@ -32,7 +32,8 @@ export class AppStore extends AsyncStore {
         return this.guests.filter(guest => (
             (!this.filter.query ||
             (guest.view.name && (guest.view.name.indexOf(this.filter.query) != -1)) ||
-            (guest.view.tableNumber && (guest.view.tableNumber.indexOf(this.filter.query) != -1))) &&
+            (guest.view.tableNumber && (guest.view.tableNumber.indexOf(this.filter.query) != -1)) ||
+            (guest.view.comments && (guest.view.comments.indexOf(this.filter.query) != -1))) &&
             (!this.filter.missingOnly || !guest.arrived)
         ));
     }

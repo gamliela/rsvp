@@ -50,6 +50,10 @@ class EditGuestDialog extends React.Component {
             <InputRTL type="text" label="טופל ע&quot;י" name="handledBy"
                       value={this.editedGuest.handledBy}
                       onChange={this.updateField.bind(this, 'handledBy')}/>
+            <InputRTL type="text" label="הערות" name="comments"
+                      value={this.editedGuest.comments}
+                      multiline={true}
+                      onChange={this.updateField.bind(this, 'comments')}/>
         </Dialog>
     }
 
