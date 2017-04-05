@@ -67,11 +67,11 @@ export default class Guest {
     @computed get numGuestsCount() {
         let res = parseInt(this.newNumGuests);
         if (!isNaN(res))
-            return Math.max(res,1);
+            return Math.max(res,0);
         res = parseInt(this.numGuests);
         if (!isNaN(res))
-            return Math.max(res,1);
-        return 1;
+            return Math.max(res,0);
+        return 0;
     }
 
     @computed get view() {
