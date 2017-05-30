@@ -39,6 +39,7 @@ class GuestCard extends React.Component {
                     subtitle={"שולחן " + view.tableNumber}
                 />
                 <CardText>{view.numGuests} מוזמנים</CardText>
+                <CardText>{guest.comments}</CardText>
                 <CardActions>
                     <div className={style.filler}></div>
                     <span>{view.arrivalTimeTruncated}</span>
